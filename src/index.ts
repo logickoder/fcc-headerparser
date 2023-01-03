@@ -1,6 +1,4 @@
 import express, { Express, Request, Response } from 'express';
-// import * as express from 'express'
-import { AddressInfo } from 'net'
 import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
@@ -8,7 +6,7 @@ import path from 'path';
 // init project
 dotenv.config();
 const app: Express = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC
@@ -32,6 +30,6 @@ app.get('/api/whoami', function (req: Request, res: Response) {
 });
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT || 3000, function () {
-    console.log('Your app is listening on port ' + ((listener?.address() as AddressInfo)?.port ?? ''));
+app.listen(port, function () {
+    console.log(`Your app is listening on port ${port}`)
 });

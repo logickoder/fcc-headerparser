@@ -20,9 +20,13 @@ app.use(express_1.default.static('public'));
 app.get('/', function (_req, res) {
     res.sendFile(path_1.default.join(__dirname, '../views/index.html'));
 });
-// your first API endpoint...
-app.get('/api/hello', function (_req, res) {
-    res.json({ greeting: 'hello API' });
+// The who am i endpoint
+app.get('/api/whoami', function (req, res) {
+    res.json({
+        ipaddress: req.socket.remoteAddress,
+        language: req.headers["accept-language"],
+        software: req.headers['user-agent']
+    });
 });
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {

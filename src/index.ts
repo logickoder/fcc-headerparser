@@ -22,9 +22,13 @@ app.get('/', function (_req: Request, res: Response) {
     res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
-// your first API endpoint...
-app.get('/api/hello', function (_req: Request, res: Response) {
-    res.json({ greeting: 'hello API' });
+// The who am i endpoint
+app.get('/api/whoami', function (req: Request, res: Response) {
+    res.json({
+        ipaddress: req.socket.remoteAddress,
+        language: req.headers["accept-language"],
+        software: req.headers['user-agent']
+    });
 });
 
 // listen for requests :)
